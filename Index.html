@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BWOKCHEN NFTs - Cyberpunk Collection</title>
+    <style>
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-blue: #00f0ff;
+            --neon-purple: #9900ff;
+            --dark-bg: #0a0a10;
+            --darker-bg: #050508;
+            --card-bg: rgba(20, 20, 30, 0.7);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+            color: white;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .glitch-container {
+            position: relative;
+        }
+        
+        .glitch {
+            font-size: 4rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            text-shadow: 
+                0.05em 0 0 rgba(255, 0, 255, 0.75),
+                -0.025em -0.05em 0 rgba(0, 255, 255, 0.75),
+                0.025em 0.05em 0 rgba(0, 255, 0, 0.75);
+            animation: glitch 2s infinite;
+            text-align: center;
+            margin: 2rem 0;
+            letter-spacing: 0.5rem;
+        }
+        
+        @keyframes glitch {
+            0% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 255, 0.75),
+                    -0.05em -0.025em 0 rgba(0, 255, 255, 0.75),
+                    -0.025em 0.05em 0 rgba(0, 255, 0, 0.75);
+            }
+            14% {
+                text-shadow: 
+                    0.05em 0 0 rgba(255, 0, 255, 0.75),
+                    -0.05em -0.025em 0 rgba(0, 255, 255, 0.75),
+                    -0.025em 0.05em 0 rgba(0, 255, 0, 0.75);
+            }
+            15% {
+                text-shadow: 
+                    -0.05em -0.025em 0 rgba(255, 0, 255, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 255, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 255, 0, 0.75);
+            }
+            49% {
+                text-shadow: 
+                    -0.05em -0.025em 0 rgba(255, 0, 255, 0.75),
+                    0.025em 0.025em 0 rgba(0, 255, 255, 0.75),
+                    -0.05em -0.05em 0 rgba(0, 255, 0, 0.75);
+            }
+            50% {
+                text-shadow: 
+                    0.025em 0.05em 0 rgba(255, 0, 255, 0.75),
+                    0.05em 0 0 rgba(0, 255, 255, 0.75),
+                    0 -0.05em 0 rgba(0, 255, 0, 0.75);
+            }
+            99% {
+                text-shadow: 
+                    0.025em 0.05em 0 rgba(255, 0, 255, 0.75),
+                    0.05em 0 0 rgba(0, 255, 255, 0.75),
+                    0 -0.05em 0 rgba(0, 255, 0, 0.75);
+            }
+            100% {
+                text-shadow: 
+                    -0.025em 0 0 rgba(255, 0, 255, 0.75),
+                    -0.025em -0.025em 0 rgba(0, 255, 255, 0.75),
+                    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75);
+            }
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--neon-blue);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+        
+        header {
+            background-color: var(--darker-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--neon-purple);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-links a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--neon-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover:before {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            border: none;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+        
+        .btn:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -200%;
+                top: -200%;
+            }
+            100% {
+                left: 100%;
+                top: 100%;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, rgba(255, 0, 255, 0.1), rgba(0, 0, 0, 0)),
+                linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 0, 0, 0));
+            z-index: -1;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+            background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #ddd;
+            max-width: 600px;
+        }
+        
+        .nft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .nft-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(150, 150, 255, 0.1);
+        }
+        
+        .nft-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4),
+                        0 0 10px var(--neon-blue),
+                        0 0 20px rgba(0, 240, 255, 0.3);
+        }
+        
+        .nft-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(150, 150, 255, 0.2);
+        }
+        
+        .nft-info {
+            padding: 1.5rem;
+        }
+        
+        .nft-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .nft-creator {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+        
+        .nft-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .price-tag {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--neon-pink);
+        }
+        
+        .eth-icon {
+            height: 1rem;
+            margin-right: 0.3rem;
+            vertical-align: middle;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin: 4rem 0 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+        }
+        
+        .section-title:before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+        }
+        
+        .marketplace {
+            background-color: rgba(10, 10, 20, 0.7);
+            padding: 3rem 0;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--neon-purple);
+            border-bottom: 1px solid var(--neon-purple);
+        }
+        
+        .marketplace-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            background-color: transparent;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--neon-blue);
+            color: black;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .marketplace-search {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            border: 1px solid var(--neon-purple);
+            background-color: rgba(20, 20, 30, 0.7);
+            color: white;
+            width: 100%;
+            max-width: 500px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+        
+        footer {
+            background-color: var(--darker-bg);
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 5rem;
+            border-top: 1px solid var(--neon-purple);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(150, 150, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--neon-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(150, 150, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(150, 150, 255, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--neon-blue), transparent);
+            opacity: 0.5;
+            z-index: 999;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% {
+                top: -10px;
+            }
+            100% {
+                top: 100vh;
+            }
+        }
+        
+        .connect-wallet {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .glitch {
+                font-size: 2.5rem;
+            }
+            
+            .nft-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .connect-wallet {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    <div class="scan-line"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">BWOKCHEN</div>
+            <div class="nav-links">
+                <a href="#collection">Collection</a>
+                <a href="#marketplace">Marketplace</a>
+                <a href="#about">About</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <button class="btn">Connect Wallet</button>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1 class="hero-title">Cybernetic Evolution</h1>
+        <p class="hero-subtitle">Exclusive NFT collection where digital art meets the cyberpunk future. Own a piece of the digital revolution.</p>
+        <button class="btn">Explore Collection</button>
+    </section>
+    
+    <div class="container">
+        <div class="glitch-container">
+            <h2 class="glitch" id="collection">FEATURED NFTs</h2>
+        </div>
+        <p class="subtitle">Limited Edition Cyberpunk Collection</p>
+        
+        <div class="nft-grid">
+            <!-- NFT 1 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Neon Samurai" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Neon Samurai</h3>
+                    <p class="nft-creator">Creator: CyberArtist_01</p>
+                    <p>A digital warrior emerging from the neon-lit alleyways of Neo-Tokyo, blade shimmering with augmented reality enhancements.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">2.5 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT 2 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Digital Consciousness" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Digital Consciousness</h3>
+                    <p class="nft-creator">Creator: QuantumPixel</p>
+                    <p>A visualization of human consciousness uploaded to the digital realm, exploring the boundaries between humanity and technology.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">3.8 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT 3 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Synthetic Dreams" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Synthetic Dreams</h3>
+                    <p class="nft-creator">Creator: NeuralArtifice</p>
+                    <p>The dreams of an AI visualized through fractal mathematics and neural network hallucinations.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">1.75 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT 4 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Cybernetic Eye" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Cybernetic Eye</h3>
+                    <p class="nft-creator">Creator: RoboGenius</p>
+                    <p>An augmented vision system that allows the wearer to see beyond the electromagnetic spectrum, visualizing data streams.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">2.2 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT 5 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Quantum City" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Quantum City</h3>
+                    <p class="nft-creator">Creator: UrbanMatrix</p>
+                    <p>A sprawling metropolis that exists simultaneously across multiple quantum states, each building a processor in a vast computational network.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">4.5 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT 6 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Neural Interface" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Neural Interface</h3>
+                    <p class="nft-creator">Creator: BrainwaveArtist</p>
+                    <p>A conceptual piece representing the merging of human neural pathways with digital networks.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">3.0 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT 7 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Holographic Deity" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Holographic Deity</h3>
+                    <p class="nft-creator">Creator: DivineBinary</p>
+                    <p>A digital god worshipped by AIs, representing the concept of divine programming and algorithmic perfection.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">5.8 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT 8 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Data Phantom" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Data Phantom</h3>
+                    <p class="nft-creator">Creator: GhostInTheCode</p>
+                    <p>A digital entity that exists only in the gaps between data packets, manifesting briefly in network glitches.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">2.8 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT 9 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Circuit Shaman" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Circuit Shaman</h3>
+                    <p class="nft-creator">Creator: TechnoMystic</p>
+                    <p>A spiritual guide for the digital age, helping lost souls navigate the complexities of cyber existence.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">3.2 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NFT 10 -->
+            <div class="nft-card">
+                <img src="/api/placeholder/400/320" alt="Binary Phoenix" class="nft-img">
+                <div class="nft-info">
+                    <h3 class="nft-title">Binary Phoenix</h3>
+                    <p class="nft-creator">Creator: CodeReborn</p>
+                    <p>A mythical creature reborn from corrupted data, symbolizing resilience and transformation in the digital age.</p>
+                    <div class="nft-price">
+                        <span class="price-tag">4.0 ETH</span>
+                        <button class="btn">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section class="marketplace" id="marketplace">
+        <div class="container">
+            <h2 class="section-title">NFT Marketplace</h2>
+            
+            <div class="marketplace-search">
+                <input type="text" class="search-input" placeholder="Search for NFTs, collections, or creators...">
+            </div>
+            
+            <div class="marketplace-filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Art</button>
+                <button class="filter-btn">Collectibles</button>
+                <button class="filter-btn">Music</button>
+                <button class="filter-btn">Virtual Worlds</button>
+                <button class="filter-btn">Utility</button>
+            </div>
+            
+            <div class="nft-grid">
+                <!-- Marketplace items are the same as collection for demo purposes -->
+                <!-- NFT 1 -->
+                <div class="nft-card">
+                    <img src="/api/placeholder/400/320" alt="Neon Samurai" class="nft-img">
+                    <div class="nft-info">
+                        <h3 class="nft-title">Neon Samurai</h3>
+                        <p class="nft-creator">Creator: CyberArtist_01</p>
+                        <p>A digital warrior emerging from the neon-lit alleyways of Neo-Tokyo.</p>
+                        <div class="nft-price">
+                            <span class="price-tag">2.5 ETH</span>
+                            <button class="btn">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NFT 2 -->
+                <div class="nft-card">
+                    <img src="/api/placeholder/400/320" alt="Digital Consciousness" class="nft-img">
+                    <div class="nft-info">
+                        <h3 class="nft-title">Digital Consciousness</h3>
+                        <p class="nft-creator">Creator: QuantumPixel</p>
+                        <p>A visualization of human consciousness uploaded to the digital realm.</p>
+                        <div class="nft-price">
+                            <span class="price-tag">3.8 ETH</span>
+                            <button class="btn">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NFT 3 -->
+                <div class="nft-card">
+                    <img src="/api/placeholder/400/320" alt="Synthetic Dreams" class="nft-img">
+                    <div class="nft-info">
+                        <h3 class="nft-title">Synthetic Dreams</h3>
+                        <p class="nft-creator">Creator: NeuralArtifice</p>
+                        <p>The dreams of an AI visualized through fractal mathematics.</p>
+                        <div class="nft-price">
+                            <span class="price-tag">1.75 ETH</span>
+                            <button class="btn">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- More NFTs would be here in a real marketplace -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="container">
+        <h2 class="section-title">About Bwokchen</h2>
+        <p style="text-align: center; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Bwokchen NFTs is at the forefront of the cyberpunk digital art revolution. Our collection showcases the creative fusion of technology, art, and futuristic vision through uniquely crafted non-fungible tokens that live on
